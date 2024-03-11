@@ -17,7 +17,12 @@ export default function Home() {
 
     const response = await fetch("/api/predictions", {
       method: "POST",
-      body: new FormData(e.currentTarget),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: e.target.prompt.value,
+      }),
     });
 
     let prediction = await response.json();
@@ -32,7 +37,7 @@ export default function Home() {
       prediction.status !== "failed"
     ) {
       await sleep(1000);
-      const response = await fetch("/api/predictions/" + prediction.id, { cache: 'no-store' });
+      const response = await fetch("/api/predictions/" + prediction.id);
       prediction = await response.json();
       if (response.status !== 200) {
         setError(prediction.detail);
