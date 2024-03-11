@@ -21,7 +21,7 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        prompt: e.target.prompt.value,
+        prompt: e.currentTarget,
       }),
     });
 
