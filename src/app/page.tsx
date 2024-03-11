@@ -17,12 +17,7 @@ export default function Home() {
 
     const response = await fetch("/api/predictions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: e.currentTarget,
-      }),
+      body: new FormData(e.currentTarget),
     });
 
     let prediction = await response.json();
